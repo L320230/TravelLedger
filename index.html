@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李麗娟 UI/UX 設計師履歷+作品集</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ================= 核心修復與全域變數 ================= */
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-body);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            width: 100%;
+            margin: 0; padding: 0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-body: #F4F7F9;
+            --text-dark: #0F172A;
+            --text-body: #334155;
+            --text-muted: #64748B;
+            --primary: #4F46E5;
+            --primary-light: #818CF8;
+            --accent: #06B6D4;
+            --gold: #F59E0B;
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+            --shadow-glass: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
+            --shadow-hover: 0 20px 40px -5px rgba(15, 23, 42, 0.12);
+        }
+
+        /* ================= 動態背景 ================= */
+        .aurora-bg { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -2; overflow: hidden; background: #F8FAFC; }
+        .blob { position: absolute; filter: blur(90px); opacity: 0.5; border-radius: 50%; animation: float 20s infinite alternate ease-in-out; z-index: -1; }
+        .blob-1 { width: 600px; height: 600px; background: #E0E7FF; top: -10%; left: -10%; }
+        .blob-2 { width: 500px; height: 500px; background: #FCE7F3; top: 40%; right: -10%; animation-delay: -5s; }
+        .blob-3 { width: 400px; height: 400px; background: #CFFAFE; bottom: -10%; left: 20%; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(40px, 60px) scale(1.05); }
+        }
+
+        /* ================= 置頂主視覺 Hero Section ================= */
+        .spotlight-hero {
+            position: relative;
+            background: linear-gradient(-45deg, #0B1120, #1E293B, #1e1b4b, #0f172a);
+            background-size: 400% 400%; animation: gradientBG 15s ease infinite;
+            min-height: 90vh; display: flex; align-items: center; overflow: hidden;
+            padding: 80px 5%; z-index: 1; width: 100%;
+        }
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+        .glow-orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.6; z-index: -1; animation: pulse 10s infinite alternate ease-in-out; }
+        .hero-glow-1 { width: 600px; height: 600px; background: #4F46E5; top: -10%; left: -5%; }
+        .hero-glow-2 { width: 600px; height: 600px; background: #06B6D4; bottom: -20%; right: -10%; }
+        @keyframes pulse { 0% { transform: scale(1); } 100% { transform: scale(1.2); } }
+
+        .hero-container { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 5fr 6fr; gap: 40px; align-items: center; width: 100%; }
+        .hero-content { color: #FFF; z-index: 10; animation: fadeUp 1s ease forwards; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); padding: 8px 20px; border-radius: 100px; font-size: 14px; font-weight: 600; color: #E0E7FF; margin-bottom: 24px; letter-spacing: 1px; }
+        .fa-crown:before { content: "\f521"; color: #fbd408; }
+        .hero-title { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 16px; letter-spacing: -1px; word-wrap: break-word; }
+        .hero-subtitle { font-size: 1.5rem; font-weight: 360; color: #afc3df; margin-bottom: 32px; }
+        
+        .hero-project-box { background: rgba(15, 23, 42, 0.3); border: 1px solid rgba(255, 255, 255, 0.2); border-left: 4px solid var(--accent); padding: 24px; border-radius: var(--radius-md); backdrop-filter: blur(12px); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6); }
+        .hp-title { font-size: 18px; font-weight: 700; color: #FFF; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .hp-tech { font-size: 14px; color: var(--accent); font-family: 'Inter'; font-weight: 600; margin-bottom: 12px; }
+        
+        /* ================= 核心排版：齊行與防破版 ================= */
+        .hp-desc, .about-text { 
+            color: var(--text-body); 
+            font-size: 16px; 
+            line-height: 1.8; 
+            text-align: justify; 
+            text-justify: inter-ideograph; /* CJK 最佳齊行模式 */
+            word-break: break-word; /* 避免英文單字過長撐開字距 */
+            letter-spacing: 0.5px;
+            margin-bottom: 1.2rem;
+        }
+        .hp-desc { color: #CBD5E1; margin-bottom: 0; }
+
+        .hero-visual { position: relative; height: 600px; display: flex; justify-content: center; align-items: center; width: 100%; }
+        .phones-wrapper { position: relative; transform: scale(0.85); z-index: 10; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
+        .phone-mockup { position: absolute; width: 280px; height: 606px; background-color: #fff; border-radius: 42px; border: 8px solid #fff; box-shadow: inset 0 0 0 2px #e2e8f0, 0 25px 50px -12px rgba(0, 0, 0, 0.5); overflow: hidden; cursor: pointer; transform: translate(var(--tx), var(--ty)) scale(var(--s)) rotate(var(--r)); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease, z-index 0s; opacity: 0; animation: phoneStagger 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        @keyframes phoneStagger { 0% { opacity: 0; translate: 0 150px; } 100% { opacity: 1; translate: 0 0; } }
+        .phone-mockup img { width: 100%; height: 100%; object-fit: cover; }
+        .phone-mockup:hover { transform: translate(var(--tx), calc(var(--ty) - 40px)) scale(calc(var(--s) + 0.05)) rotate(0deg); z-index: 20 !important; box-shadow: 0 40px 80px rgba(0,0,0,0.6); }
+
+        .pm-L2 { --tx: -280px; --ty: 60px; --s: 0.7; --r: -18deg; z-index: 1; animation-delay: 0.4s; }
+        .pm-L1 { --tx: -140px; --ty: 20px; --s: 0.85; --r: -9deg; z-index: 2; animation-delay: 0.2s; }
+        .pm-C  { --tx: 0px; --ty: -20px; --s: 1; --r: 0deg; z-index: 3; box-shadow: inset 0 0 0 2px #e2e8f0, 0 30px 60px rgba(0,0,0,0.6); animation-delay: 0s; }
+        .pm-R1 { --tx: 140px; --ty: 20px; --s: 0.85; --r: 9deg; z-index: 2; animation-delay: 0.2s; }
+        .pm-R2 { --tx: 280px; --ty: 60px; --s: 0.7; --r: 18deg; z-index: 1; animation-delay: 0.4s; }
+
+        /* ================= 導覽列 ================= */
+        .sticky-nav { position: sticky; top: 0; z-index: 999; background: #3339a9; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); padding: 16px 5%; display: flex; justify-content: center; gap: 24px; margin-bottom: 40px; transition: all 0.3s ease; width: 100%; }
+        .sticky-nav a { text-decoration: none; color: #fff; font-weight: 700; font-size: 16px; padding: 8px 24px; border-radius: 100px; transition: all 0.3s ease; white-space: nowrap; }
+        .sticky-nav a:hover, .sticky-nav a.active { background: var(--primary); color: #FFF; box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4); transform: translateY(-2px); }
+
+        /* ================= 內容佈局與卡片 ================= */
+        .main-layout { max-width: 1320px; margin: 0 auto 80px; padding: 0 2%; display: grid; position: relative; z-index: 20; align-items: start; width: 100%; }
+        .content-area { display: flex; flex-direction: column; min-width: 0; width: 100%; }
+
+        .card { background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-top: 4px solid #B5B0F6; border-radius: var(--radius-lg); padding: 32px; box-shadow: var(--shadow-glass); margin-bottom: 24px; transition: transform 0.4s ease, box-shadow 0.4s ease; scroll-margin-top: 100px; width: 100%; }
+        .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); background: rgba(255,255,255,0.9); }
+
+        .section-title { font-weight: 700; color: var(--text-dark); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; letter-spacing: 0.5px; }
+        .section-title i { color: var(--primary); background: rgba(79, 70, 229, 0.15); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 16px; }
+
+        .highlight { color: var(--primary); font-weight: 700; background: #EEF2FF; padding: 2px 6px; border-radius: 4px; }
+        .skills-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+        .skill-tag { background:#f8fafc; color: var(--text-dark); padding: 8px 16px; border-radius: 100px; font-size: 13px; font-weight: 600; border: 1px solid rgb(214 212 241); transition: all 0.3s ease; }
+        .skill-tag:hover { background: #f0efff; border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); }
+
+        .project-group { margin-bottom: 32px; }
+        .project-group:last-child { margin-bottom: 0; }
+        .project-group h3 { color: var(--text-dark); font-size: 1.15rem; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; font-weight: 700; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 8px; }
+        .sdd-indent { padding-left: 12px; }
+
+        /* ================= 內部卡片模組 (Card Grid) ================= */
+        .intro-grid {
+            display: grid;
+            /* 使用 min 確保在極小螢幕(如 320px)不會超出邊界 */
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .intro-sub-card {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            padding: 24px;
+            border-radius: var(--radius-md);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px -5px rgba(15, 23, 42, 0.03);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .intro-sub-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -5px rgba(15, 23, 42, 0.08);
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        .intro-sub-card h4 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .intro-sub-card .about-text { margin-bottom: 0; font-size: 15px; }
+        
+        .tag-mini { font-size: 12px; background: rgba(79, 70, 229, 0.1); color: var(--primary); padding: 4px 8px; border-radius: 6px; margin-right: 6px; font-weight: 600; display: inline-block; margin-bottom: 4px; }
+
+        /* 表格與圖表 */
+        .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 16px; border-radius: 12px; }
+        .typo-table { width: 100%; border-collapse: collapse; background: rgba(255,255,255,0.6); }
+        .typo-table th, .typo-table td { padding: 16px 20px; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.05); white-space: nowrap; } 
+        .typo-table th { color: var(--text-muted); font-weight: 600; background: rgba(0,0,0,0.03); text-transform: uppercase; letter-spacing: 1px; }
+        .typo-table tbody tr { transition: background 0.2s ease; }
+        .typo-table tbody tr:hover { background: rgba(255, 255, 255, 0.8); }
+
+        .diagram-container { width: 100%; background: #FFF; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 4px 10px rgba(0,0,0,0.02); overflow: hidden; margin-top: 16px; }
+        .diagram-img { width: 100%; height: auto; display: block; cursor: zoom-in; transition: transform 0.3s ease; }
+        .diagram-img:hover { transform: scale(1.02); }
+
+        /* ================= 作品集 ================= */
+        .portfolio-grid { 
+            display: grid; 
+            /* 優化：改為響應式網格，電腦版自動雙欄/三欄，手機單欄 */
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 24px; 
+            margin-bottom: 32px; 
+        }
+        .portfolio-item { border-radius: var(--radius-sm); overflow: hidden; border: 1px solid rgba(0,0,0,0.05); background: #FFF; cursor: pointer; position: relative; transition: all 0.4s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.02); display: flex; flex-direction: column; }
+        .portfolio-item:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); border-color: rgba(79, 70, 229, 0.3); }
+        .portfolio-item .img-wrapper { overflow: hidden; width: 100%; height: auto; flex-shrink: 0; }
+        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .portfolio-item:hover img { transform: scale(1.08); }
+        .portfolio-item p { padding: 14px 16px; font-size: 15px; text-align: center; color: var(--text-dark); font-weight: 600; background: #FFF; border-top: 1px solid rgba(0,0,0,0.05); margin: 0; transition: color 0.3s; }
+        .portfolio-item:hover p { color: var(--primary); }
+
+        /* ================= Design System ================= */
+        .ds-container { --ds-primary: #0ea5e9; --ds-secondary: #f43f5e; --ds-accent: #f59e0b; --ds-success: #10b981; --ds-danger: #ef4444; --ds-text-main: #0f172a; --ds-text-sub: #475569; --ds-text-light: #94a3b8; }
+        .ds-section { margin-bottom: 40px; }
+        .ds-section:last-child { margin-bottom: 0; }
+        .ds-title { font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 8px; }
+        .ds-desc { font-size: 15px; color: var(--text-body); margin-bottom: 24px; line-height: 1.6; }
+        .color-spec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .color-card { background: rgba(255,255,255,0.7); border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); transition: transform 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .color-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.06); }
+        .color-box { height: 90px; width: 100%; }
+        .color-details { padding: 16px; }
+        .color-details h4 { margin: 0 0 6px; font-size: 15px; font-weight: 800; color: var(--text-dark); }
+        .color-details code { display: inline-block; background: rgba(0,0,0,0.04); padding: 4px 8px; border-radius: 6px; font-size: 13px; color: var(--text-muted); margin-bottom: 8px; font-family: monospace; }
+        .color-usage { display: block; font-size: 13px; }
+
+        .component-demo { background: rgba(255,255,255,0.4); border: 1px dashed rgba(0,0,0,0.15); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 32px; }
+        .demo-row { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end; }
+        .demo-item { flex: 1; min-width: 220px; }
+        .demo-label { display: block; font-size: 13px; font-weight: 700; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; }
+        .ds-btn-base { padding: 12px 24px; border-radius: 10px; font-weight: 700; border: none; cursor: pointer; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); font-size: 15px; display: inline-flex; align-items: center; gap: 8px; }
+        .ds-btn-p { background: var(--ds-primary); color: white; }
+        .ds-btn-p:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(14, 165, 233, 0.25); }
+        .ds-btn-d { background: var(--ds-danger); color: white; }
+        .ds-btn-s { background: var(--ds-secondary); color: white; }
+        .ds-btn-fab { width: 56px; height: 56px; border-radius: 50%; background: var(--ds-accent); color: white; border: 3px solid white; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.3); cursor: pointer; transition: all 0.3s; }
+        .ds-btn-fab:hover { transform: rotate(90deg) scale(1.1); background: var(--ds-secondary); }
+        .ds-input-replica { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.9); border: 2px solid var(--ds-primary); border-radius: 14px; font-size: 15px; color: var(--text-dark); font-weight: 500; outline: none; }
+        
+        .motion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .motion-card { background: var(--ds-text-main); color: white; padding: 24px; border-radius: 16px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .motion-card h4 { margin: 0 0 8px; color: var(--ds-primary); font-size: 16px; font-weight: 700; }
+        .motion-card p { font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 12px; }
+        .bezier-curve { font-family: monospace; color: #10b981; font-size: 14px; background: rgba(0,0,0,0.4); padding: 6px 10px; border-radius: 6px; display: inline-block; }
+        
+        .a11y-demo { display: flex; gap: 20px; flex-wrap: wrap; }
+        .glass-demo { padding: 24px; border-radius: 16px; background: rgba(255,255,255,0.5); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.8); flex: 1; text-align: center; min-width: 220px; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05); }
+        .enhance-demo { border: 2px solid var(--ds-primary) !important; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15) !important; background: white; }
+
+        /* ================= 動畫與 Lightbox ================= */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+
+        .lightbox { display: none; position: fixed; z-index: 9999; inset: 0; background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); align-items: center; justify-content: center; }
+        .lightbox-content-wrapper { position: relative; max-width: 90%; max-height: 90%; text-align: center; z-index: 100; }
+        .lightbox-content { max-width: 100%; max-height: 80vh; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); object-fit: contain; }
+        #lightbox-caption { margin-top: 20px; color: #FFF; font-size: 18px; font-weight: 600; letter-spacing: 1px; }
+
+        .lightbox-btn { position: absolute; z-index: 1000; background: rgba(0, 0, 0, 0.5); color: white; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; backdrop-filter: blur(4px); }
+        .lightbox-close { top: 30px; right: 40px; width: 48px; height: 48px; border-radius: 50%; font-size: 24px; }
+        .lightbox-prev, .lightbox-next { top: 50%; transform: translateY(-50%); width: 56px; height: 56px; border-radius: 50%; font-size: 24px; }
+        .lightbox-prev { left: 40px; }
+        .lightbox-next { right: 40px; }
+        .lightbox-btn:hover { background: var(--primary); transform: scale(1.1); }
+        .lightbox-prev:hover { transform: translateY(-50%) scale(1.1); }
+        .lightbox-next:hover { transform: translateY(-50%) scale(1.1); }
+
+        .btn-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--text-dark); color: #FFF; border: none; border-radius: 50%; font-size: 20px; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.15); opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); z-index: 1000; }
+        .btn-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        .btn-top:hover { background: var(--primary); transform: translateY(-5px); }
+
+        /* ================= RWD 響應式佈局 ================= */
+        @media (max-width: 1280px) {
+            .hero-container { grid-template-columns: 1fr 1fr; }
+            .hero-title { font-size: 3.5rem; }
+            .phones-wrapper { transform: scale(0.75); }
+        }
+        
+        @media (max-width: 1024px) {
+            .spotlight-hero { padding: 100px 5% 60px; min-height: auto; }
+            .hero-container { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .hero-project-box { text-align: left; max-width: 720px; margin: 0 auto; }
+            .hero-visual { height: 480px; }
+            .phones-wrapper { transform: scale(0.7); }
+            
+            .main-layout { grid-template-columns: 1fr; padding: 0 4%; }
+            .portfolio-item .img-wrapper { height: auto; aspect-ratio: 16 / 9; width: 100%; flex-shrink: 0; }
+            
+            .sticky-nav { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; -ms-overflow-style: none; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding: 12px 5%; gap: 12px; }
+            .sticky-nav::-webkit-scrollbar { display: none; }
+            .sticky-nav a { font-size: 15px; padding: 8px 20px; flex-shrink: 0; }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.8rem; }
+            .hero-visual { height: 380px; }
+            .phones-wrapper { transform: scale(0.6); }
+            
+            .pm-L2, .pm-R2 { display: none !important; }
+            .pm-L1 { --tx: -150px; --ty: 15px; --s: 0.85; --r: -8deg; }
+            .pm-R1 { --tx: 150px; --ty: 15px; --s: 0.85; --r: 8deg; }
+            .pm-C  { --tx: 0px; --ty: -10px; --s: 1; --r: 0deg; }
+
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .lightbox-prev { left: 10px; width: 44px; height: 44px; }
+            .lightbox-next { right: 10px; width: 44px; height: 44px; }
+            .motion-grid { grid-template-columns: 1fr; }
+            .demo-row { flex-direction: column; align-items: stretch; gap: 16px; }
+            .sdd-indent { padding-left: 0; }
+        }
+        
+        @media (max-width: 480px) {
+            .spotlight-hero { padding: 80px 5% 40px; }
+            .hero-title { font-size: 2.2rem; }
+            .hero-subtitle { font-size: 1.2rem; margin-bottom: 24px; }
+            
+            .hero-project-box { padding: 20px; }
+            .hp-title { font-size: 16px; align-items: flex-start; }
+            
+            .hero-visual { height: 300px; }
+            .phones-wrapper { transform: scale(0.48); }
+            .pm-L1 { --tx: -130px; --ty: 10px; --s: 0.85; --r: -6deg; }
+            .pm-R1 { --tx: 130px; --ty: 10px; --s: 0.85; --r: 6deg; }
+            
+            .card { padding: 24px 16px; }
+            .ds-container { padding: 0; }
+            .color-spec-grid { grid-template-columns: 1fr 1fr; } 
+        }
+    </style>
+</head>
+<body>
+
+<div class="aurora-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+</div>
+
+<header class="spotlight-hero">
+    <div class="glow-orb hero-glow-1"></div>
+    <div class="glow-orb hero-glow-2"></div>
+    
+    <div class="hero-container">
+        <div class="hero-content">
+            <div class="hero-badge"><i class="fas fa-crown"></i> RECENT WORKS</div>
+            <h1 class="hero-title">Travel Ledger</h1>
+            <h2 class="hero-subtitle">以設計解決問題 | 用美感傳遞價值</h2>
+            
+            <div class="hero-project-box">
+                <div class="hp-title"><i class="fas fa-rocket" style="color: var(--accent);"></i> TravelLedger 旅遊帳簿與預算管理系統</div>
+                <div class="hp-tech">UI/UX 設計 • Use Case/ERD • 全端程式開發</div>
+                <p class="hp-desc">
+                   「TravelLedger」是基於 ASP.NET Core MVC (C#) 框架開發，並採用 SQL Server 作為資料庫的系統。提供完整的記帳 CRUD 功能，整合行程時間軸與實體圖片上傳至伺服器端的功能。系統內建複雜的分帳演算法與匯率轉換機制，涵蓋「行前預算編列」、「旅途中記帳與行程對照」到「行後財務結算」的完整旅遊生命週期。
+                </p>
+            </div>
+        </div>
+        
+        <div class="hero-visual">
+            <div class="phones-wrapper">
+                <div class="phone-mockup pm-L2"><img src="img/iPhone_05.jpg" alt="TravelLedger 旅程設定"></div>
+                <div class="phone-mockup pm-L1"><img src="img/iPhone_04.jpg" alt="TravelLedger 行程規劃"></div>
+                <div class="phone-mockup pm-C"><img src="img/iPhone_01.jpg" alt="TravelLedger 首頁總覽"></div>
+                <div class="phone-mockup pm-R1"><img src="img/iPhone_03.jpg" alt="TravelLedger 預算透視"></div>
+                <div class="phone-mockup pm-R2"><img src="img/iPhone_02.jpg" alt="TravelLedger 支出明細"></div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<nav class="sticky-nav">
+    <a href="#introduce">系統介紹</a>
+    <a href="#sdd">系統設計規格書 (SDD)</a>
+    <a href="#use-case">使用案例圖(Use Case)</a>
+    <a href="#erd">實體關聯圖(ERD)</a>
+    <a href="#design-system">Design System</a>
+    <a href="#portfolio">Portfolio</a>
+</nav>
+
+<div class="main-layout">
+    <main class="content-area">
+        
+        <!-- ================= 系統介紹 ================= -->
+        <div id="introduce" class="card fade-in-up">
+            <h2 class="section-title"><i class="fas fa-file-code"></i> 系統介紹</h2>
+            <p class="about-text">
+                「TravelLedger」是基於<span class="highlight"> ASP.NET Core MVC (C#) </span>框架開發，並採用 SQL Server 作為關聯式資料庫的旅遊帳簿與預算管理系統。
+            </p>
+            
+            <div class="intro-grid">
+                <div class="intro-sub-card">
+                    <h4><i class="fas fa-server"></i> 後端架構與資料庫設計</h4>
+                    <p class="about-text">
+                        系統後端採用 Entity Framework Core 進行資料庫操作，實作了包含使用者、旅程、類別、行程、支出明細以及分帳紀錄等多關聯性的資料庫模型，確保多對多關係的財務數據一致性與完整性。
+                    </p>
+                </div>
+
+                <div class="intro-sub-card">
+                    <h4><i class="fas fa-laptop-code"></i> 前端架構與動態介面實作</h4>
+                    <p class="about-text">
+                        前端介面運用 HTML、CSS 與 JavaScript 進行深度開發，採用現代化的「毛玻璃（Glassmorphism）」視覺風格與動態響應式設計（RWD）。系統運用非同步資料交換與動態模態視窗，無縫串接後端 API。
+                    </p>
+                </div>
+
+                <div class="intro-sub-card">
+                    <h4><i class="fas fa-gem"></i> 系統核心價值</h4>
+                    <p class="about-text">
+                        本系統不僅提供完整的記帳 CRUD 功能，更整合了行程時間軸與實體圖片上傳至伺服器端的功能。系統內建複雜的分帳演算法與匯率轉換機制，完美涵蓋了從「行前預算編列」、「旅途中記帳與行程對照」到「行後財務結算」的完整旅遊生命週期。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SDD ================= -->
+        <div id="sdd" class="card fade-in-up">
+            <h2 class="section-title"><i class="fas fa-code"></i> 系統設計規格書 (System Design Document)</h2>
+            <p class="about-text">
+                「TravelLedger 旅遊帳簿與預算管理系統」本文件涵蓋了系統架構、資料庫結構、API 規格、核心功能模組以及前端 UI/UX 規格，非常適合用於系統交接、未來擴充或作為「規格驅動開發」的基準文件。
+            </p>
+
+            <div class="project-group" style="margin-top: 32px;">
+                <h3><i class="fas fa-info-circle"></i> 系統概述 (System Overview)</h3>
+                <div class="sdd-indent">
+                    <p class="about-text">
+                        TravelLedger 是一款專為多人團體旅遊設計的綜合型網頁應用程式。系統結合了「行程規劃」、「記帳分帳」與「預算監控」三大核心，旨在解決旅遊中繁瑣的財務拆分問題，並提供具備高度視覺回饋（如實體票券風、收據風、液體膠囊水位等）的沉浸式使用者體驗。
+                    </p>
+                </div>
+            </div>
+
+            <div class="project-group">
+                <h3><i class="fas fa-sitemap"></i> 系統架構 (System Architecture)</h3>
+                <div class="sdd-indent">
+                    <p class="about-text">本系統前端採 SPA（單頁應用）體驗設計，但後端由 MVC 架構支撐資料渲染與 API 服務。</p>
+                    <div class="skills-container">
+                        <span class="skill-tag"><i class="fas fa-server" style="color: var(--primary);"></i> 後端框架: ASP.NET Core MVC</span>
+                        <span class="skill-tag"><i class="fas fa-database" style="color: var(--primary);"></i> ORM: Entity Framework Core</span>
+                        <span class="skill-tag"><i class="fas fa-hdd" style="color: var(--primary);"></i> 資料庫: SQL Server</span>
+                        <span class="skill-tag"><i class="fab fa-html5" style="color: var(--primary);"></i> 前端技術: HTML5, CSS3, Vanilla JS</span>
+                        <span class="skill-tag"><i class="fas fa-folder-open" style="color: var(--primary);"></i> 檔案儲存: 本地端主機儲存</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-group">
+                <h3><i class="fas fa-cogs"></i> 核心業務邏輯與模組 (Core Modules)</h3>
+                <div class="sdd-indent intro-grid">
+                    <!-- 改為資訊卡片排列 -->
+                    <div class="intro-sub-card">
+                        <h4><i class="fas fa-calculator"></i> 記帳與分帳模組</h4>
+                        <p class="about-text">系統支援三種分帳模式，於前端計算後寫入資料庫的 ExpenseSplit 表中：</p>
+                        <div style="margin-top: auto;">
+                            <span class="tag-mini">均分</span> 將總金額平均分配<br>
+                            <span class="tag-mini">比例</span> 依照輸入的百分比計算<br>
+                            <span class="tag-mini">指定</span> 輸入每位成員絕對金額
+                        </div>
+                    </div>
+                    <div class="intro-sub-card">
+                        <h4><i class="fas fa-chart-line"></i> 預算水位監控模組</h4>
+                        <p class="about-text">動態遍歷各 Category，計算該類別下所有 Expense 的總和，並與 BudgetLimit 進行比對。若超支觸發 Danger 狀態（前端表現為液體沸騰、紅色警示）。</p>
+                    </div>
+                    <div class="intro-sub-card">
+                        <h4><i class="fas fa-file-invoice-dollar"></i> 報表與結算模組</h4>
+                        <p class="about-text">支援匯出 CSV 與 PDF 報表格式。內建結算演算法，透過貪婪演算法 (Greedy Algorithm) 匹配債務人與債權人，快速產出最少筆數的「建議轉帳清單」。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-group" style="margin-top: 32px;">
+                <h3><i class="fas fa-paint-brush"></i> UI/UX 與前端規格 (UI/UX Specifications)</h3>
+                <div class="sdd-indent intro-grid">
+                    <div class="intro-sub-card">
+                        <h4><i class="fas fa-magic"></i> 視覺風格 (Visual Style)</h4>
+                        <p class="about-text">以 Glassmorphism (玻璃擬物化) 為主，大量使用 backdrop-filter: blur() 與半透明背景色。環境背景透過 CSS 動畫製作漂浮色塊，營造動態呼吸感。</p>
+                    </div>
+                    <div class="intro-sub-card">
+                        <h4><i class="fas fa-puzzle-piece"></i> 核心自訂元件</h4>
+                        <p class="about-text">包含實體票券風行程 (Boarding Pass)、熱感應收據風明細 (Thermal Receipt) 以及能量水瓶預算條 (Liquid Tanks) 等沉浸式元件設計。</p>
+                    </div>
+                    <div class="intro-sub-card">
+                        <h4><i class="fas fa-universal-access"></i> 無障礙顯示輔助</h4>
+                        <p class="about-text">提供 UI 增強模式，使用者可透過設定動態調整飽和度與對比，並為玻璃卡片切換實體化防洗白邊框，提升低對比度環境下的辨識率。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-group" style="margin-top: 32px;">
+                <h3><i class="fas fa-table"></i> 資料庫設計 (Database Schema / ERD)</h3>
+                <div class="sdd-indent">
+                    <div class="table-responsive">
+                        <table class="typo-table">
+                            <thead>
+                                <tr><th>實體 (Entity)</th><th>說明</th><th>核心欄位與關聯</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>User</strong></td><td>使用者帳號</td><td>UserId (PK), Name, AvatarUrl</td></tr>
+                                <tr><td><strong>Trip</strong></td><td>旅程主檔</td><td>TripId (PK), Title, StartDate, EndDate, TotalBudget</td></tr>
+                                <tr><td><strong>TripMember</strong></td><td>旅程成員關聯表</td><td>TripId (PK/FK), UserId (PK/FK), Role, JoinedAt</td></tr>
+                                <tr><td><strong>Category</strong></td><td>預算類別</td><td>CategoryId (PK), TripId (FK), Key, Name, Icon, BudgetLimit</td></tr>
+                                <tr><td><strong>ItineraryItem</strong></td><td>行程節點</td><td>ItineraryId (PK), TripId (FK), Title, ScheduledTime, EstimatedCost</td></tr>
+                                <tr><td><strong>Expense</strong></td><td>支出主檔</td><td>ExpenseId (PK), TripId (FK), Title, Amount, PayerId, SplitMode</td></tr>
+                                <tr><td><strong>ExpenseSplit</strong></td><td>分帳明細表</td><td>SplitId (PK), ExpenseId (FK), DebtorId (FK), AmountOwed</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-group" style="margin-top: 32px;">
+                <h3><i class="fas fa-exchange-alt"></i> API 介面規格 (API Specifications)</h3>
+                <div class="sdd-indent">
+                    <div class="table-responsive">
+                        <table class="typo-table">
+                            <thead>
+                                <tr><th>路由 (Route)</th><th>方法</th><th>參數 / Body</th><th>說明</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>/Trip/Index</code></td><td>GET</td><td>無</td><td>渲染首頁，載入初始 ViewModel。</td></tr>
+                                <tr><td><code>/Trip/AddExpense</code></td><td>POST</td><td>Expense 參數</td><td>新增支出，包含關聯的 ExpenseSplit。</td></tr>
+                                <tr><td><code>/Trip/UpdateExpense</code></td><td>POST</td><td>Expense 參數</td><td>更新支出，會先清空舊的 Splits 再重新寫入。</td></tr>
+                                <tr><td><code>/Trip/UploadImage</code></td><td>POST</td><td>IFormFile file</td><td>接收圖片，儲存至伺服器，回傳檔案 URL。</td></tr>
+                                <tr><td><code>/Trip/InviteMember</code></td><td>POST</td><td>InviteMemberDto</td><td>新增成員，若無頭像則呼叫 DiceBear API 產生。</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 使用案例圖 (Use Case) ================= -->
+        <div id="use-case" class="card fade-in-up">
+            <h2 class="section-title"><i class="fas fa-project-diagram"></i> 使用案例圖 (Use Case)</h2>
+            <p class="about-text">
+                展示 TravelLedger 系統中不同角色（使用者、旅伴、未來展望的 API 服務）與系統核心功能（預算行程、記帳收據、分帳協作、查詢分析）之間的互動關係。
+            </p>
+            <div class="diagram-container">
+                <img src="img/use_case.png" alt="TravelLedger Use Case Diagram" class="diagram-img" data-caption="TravelLedger 使用案例圖">
+            </div>
+        </div>
+
+        <!-- ================= 實體關聯圖 (ERD) ================= -->
+        <div id="erd" class="card fade-in-up">
+            <h2 class="section-title"><i class="fas fa-database"></i> 實體關聯圖 (ERD)</h2>
+            <p class="about-text">
+                描述系統底層資料庫的結構設計，以 Trip (旅程) 為核心，延伸出使用者、成員關聯、預算類別、行程節點、支出主檔與分帳明細之間的關聯性 (1對1、1對多等)。
+            </p>
+            <div class="diagram-container">
+                <img src="img/erd.jpg" alt="TravelLedger Entity Relationship Diagram" class="diagram-img" data-caption="TravelLedger 實體關聯圖">
+            </div>
+        </div>
+
+        <!-- ================= 設計系統 ================= -->
+        <div id="design-system" class="card fade-in-up">
+            <h2 class="section-title"><i class="fas fa-palette"></i> 設計系統 (Design System)</h2>
+            
+            <div class="ds-container">
+                <div class="ds-section">
+                    <div class="ds-title">品牌色彩計畫 (Color Palette)</div>
+                    <p class="ds-desc">採用清爽的高飽和色調，結合 Slate 系列的中性灰，確保介面既有活力又不失專業感。</p>
+                    <div class="color-spec-grid">
+                        <div class="color-card"><div class="color-box" style="background: var(--ds-primary);"></div><div class="color-details"><h4>Primary Blue</h4><code>#0EA5E9</code><span class="color-usage">主操作、導航、強調色</span></div></div>
+                        <div class="color-card"><div class="color-box" style="background: var(--ds-secondary);"></div><div class="color-details"><h4>Secondary Rose</h4><code>#F43F5E</code><span class="color-usage">點綴、錯誤狀態、FAB Hover</span></div></div>
+                        <div class="color-card"><div class="color-box" style="background: var(--ds-accent);"></div><div class="color-details"><h4>Accent Amber</h4><code>#F59E0B</code><span class="color-usage">警告、提示、部分圖示</span></div></div>
+                        <div class="color-card"><div class="color-box" style="background: var(--ds-success);"></div><div class="color-details"><h4>Success Emerald</h4><code>#10B981</code><span class="color-usage">正面數據、完成狀態</span></div></div>
+                        <div class="color-card"><div class="color-box" style="background: var(--ds-text-main);"></div><div class="color-details"><h4>Slate Dark</h4><code>#0F172A</code><span class="color-usage">標題、主要文字、深色模式</span></div></div>
+                        <div class="color-card"><div class="color-box" style="background: #F8FAFC; border-bottom: 1px solid rgba(0,0,0,0.05);"></div><div class="color-details"><h4>Slate Light</h4><code>#F8FAFC</code><span class="color-usage">背景色、輸入框底色</span></div></div>
+                    </div>
+                </div>
+
+                <div class="ds-section">
+                    <div class="ds-title">字體排印 (Typography)</div>
+                    <p class="ds-desc">英數採用 <strong>Outfit</strong> 以展現幾何美感，中文則使用 <strong>思源黑體</strong> 確保跨平台顯示穩定。</p>
+                    <div class="table-responsive">
+                        <table class="typo-table">
+                            <thead><tr><th>Layer</th><th>Specs</th><th>Preview</th></tr></thead>
+                            <tbody>
+                                <tr><td>H1 / Hero Title</td><td>900 | 3.5rem | -2px</td><td style="font-size: 2.5rem; font-weight: 900; font-family: 'Outfit', sans-serif;">Tokyo 2026</td></tr>
+                                <tr><td>H2 / Section Title</td><td>800 | 2rem | -0.5px</td><td style="font-size: 1.8rem; font-weight: 800;">支出明細</td></tr>
+                                <tr><td>Body / Main Text</td><td>400 | 1rem | 1.6lh</td><td>歡迎來到 TravelLedger 旅遊管理系統。</td></tr>
+                                <tr><td>Data / Amount</td><td>800 | 1.5rem | Outfit</td><td style="font-size: 1.5rem; font-weight: 800; color: var(--ds-primary); font-family: 'Outfit', sans-serif;">$50,000.00</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="ds-section">
+                    <div class="ds-title">組件與空間互動 (Component & Spatial System)</div>
+                    <p class="ds-desc">所有元件均遵循「玻璃擬物化」原則，圓角為系統質感的關鍵，並具備高度互動回饋。</p>
+                    <div class="component-demo">
+                        <div class="demo-row">
+                            <div class="demo-item">
+                                <span class="demo-label">Primary Buttons</span>
+                                <div style="display: flex; gap: 12px; align-items: center;">
+                                    <button class="ds-btn-base ds-btn-p">儲存設定</button>
+                                    <button class="ds-btn-base ds-btn-p" style="padding: 12px; border-radius: 12px;"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <div class="demo-item">
+                                <span class="demo-label">Danger / Secondary</span>
+                                <div style="display: flex; gap: 12px;">
+                                    <button class="ds-btn-base ds-btn-d">刪除數據</button>
+                                    <button class="ds-btn-base ds-btn-s">取消</button>
+                                </div>
+                            </div>
+                            <div class="demo-item" style="flex: 0.5;">
+                                <span class="demo-label">FAB</span>
+                                <button class="ds-btn-fab"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="demo-row">
+                            <div class="demo-item">
+                                <span class="demo-label">Glass Input (Radius MD)</span>
+                                <input type="text" class="ds-input-replica" placeholder="在此輸入文字...">
+                            </div>
+                            <div class="demo-item">
+                                <span class="demo-label">Menu Item (Active)</span>
+                                <div style="background: #069fe3; padding: 12px; border-radius: 16px;">
+                                    <div style="background: white; color: var(--ds-primary); padding: 12px 20px; border-radius: 16px 50px 16px 50px; font-weight: 700; display: flex; align-items: center; gap: 10px;">
+                                        <i class="fas fa-chart-pie"></i> 首頁儀表板
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ds-section">
+                    <div class="ds-title">動畫與轉場 (Motion Design)</div>
+                    <p class="ds-desc">使用非線性動畫 (Non-linear/Ease)，所有的過渡應用物理彈性與慣性感。</p>
+                    <div class="motion-grid">
+                        <div class="motion-card"><h4>Standard Bouncy Curve</h4><p>應用於按鈕 Hover、視窗進場。</p><div class="bezier-curve">cubic-bezier(0.34, 1.56, 0.64, 1)</div></div>
+                        <div class="motion-card"><h4>Smooth Fade Curve</h4><p>應用於背景切換、透明度變化。</p><div class="bezier-curve">cubic-bezier(0.2, 0.8, 0.2, 1)</div></div>
+                    </div>
+                </div>
+
+                <div class="ds-section">
+                    <div class="ds-title">無障礙輔助 (Accessibility)</div>
+                    <p class="ds-desc">為了解決低對比度環境下的視覺辨識問題，設計了「UI 實體化邊框」模式。</p>
+                    <div class="a11y-demo">
+                        <div class="glass-demo"><span class="demo-label" style="display:block; margin-bottom: 8px;">Standard Glass</span><p style="margin:0; font-size: 14px; color: var(--text-body);">輕盈、半透明</p></div>
+                        <div class="glass-demo enhance-demo"><span class="demo-label" style="display:block; margin-bottom: 8px; color: var(--ds-primary);">UI Enhance Mode</span><p style="margin:0; font-size: 14px; color: var(--text-body);">高對比、實體邊框、深陰影</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 作品集 ================= -->
+        <div id="portfolio" class="card fade-in-up">
+            <h2 class="section-title"><i class="fas fa-layer-group"></i> 作品集 Portfolio</h2>
+            
+            <h3 style="font-size: 16px; margin: 20px 0 16px; color: var(--text-dark); font-weight: 700;">TravelLedger系統UI/UX 設計</h3>
+            <div class="portfolio-grid">
+                <div class="portfolio-item"><div class="img-wrapper"><img src="img/2026a.jpg" alt="TravelLedger 首頁"></div><p>TravelLedger 首頁</p></div>
+                <div class="portfolio-item"><div class="img-wrapper"><img src="img/2026b.jpg" alt="TravelLedger 預算透視"></div><p>TravelLedger 預算透視</p></div>
+                <div class="portfolio-item"><div class="img-wrapper"><img src="img/2026c.jpg" alt="TravelLedger 行程規劃"></div><p>TravelLedger 行程規劃</p></div>
+                <div class="portfolio-item"><div class="img-wrapper"><img src="img/2026d.jpg" alt="TravelLedger 支出明細"></div><p>TravelLedger 支出明細</p></div>
+                <div class="portfolio-item"><div class="img-wrapper"><img src="img/2026e01.jpg" alt="TravelLedger 旅程設定"></div><p>TravelLedger 旅程設定</p></div>
+                <div class="portfolio-item"><div class="img-wrapper"><img src="img/2026f.jpg" alt="TravelLedger RWD 手機板"></div><p>TravelLedger RWD 手機板</p></div>
+            </div>
+
+            <h3 style="font-size: 16px; margin: 32px 0 16px; color: var(--text-dark); font-weight: 700;">AI創作視覺設計</h3>
+            <div class="portfolio-grid">
+                <div class="portfolio-item"><div class="img-wrapper"><img src="img/ai01.jpg" alt="AI創作_百合香水瓶"></div><p>AI創作_百合香水瓶</p></div>
+                <div class="portfolio-item"><div class="img-wrapper"><img src="img/ai02.jpg" alt="AI創作_玫瑰香水瓶"></div><p>AI創作_玫瑰香水瓶</p></div>
+                <div class="portfolio-item"><div class="img-wrapper"><img src="img/ai03.jpg" alt="AI創作_紙藝孔雀"></div><p>AI創作_紙藝孔雀</p></div>
+                <div class="portfolio-item"><div class="img-wrapper"><img src="img/ai04.jpg" alt="AI創作_動漫希臘女神"></div><p>AI創作_動漫希臘女神</p></div>
+                <div class="portfolio-item"><div class="img-wrapper"><img src="img/ai05.jpg" alt="AI創作_毛茸茸的兔子"></div><p>AI創作_毛茸茸的兔子</p></div>
+                <div class="portfolio-item"><div class="img-wrapper"><img src="img/ai06.jpg" alt="AI創作_陽光小和尚"></div><p>AI創作_陽光小和尚</p></div>
+                <div class="portfolio-item"><div class="img-wrapper"><img src="img/ai07.jpg" alt="AI創作_Q版公仔設計"></div><p>AI創作_Q版公仔設計</p></div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<button id="back-to-top" class="btn-top" title="回到頂部"><i class="fas fa-arrow-up"></i></button>
+
+<div id="lightbox" class="lightbox">
+    <button class="lightbox-btn lightbox-close"><i class="fas fa-times"></i></button>
+    <button class="lightbox-btn lightbox-prev"><i class="fas fa-chevron-left"></i></button>
+    <div class="lightbox-content-wrapper">
+        <img id="lightbox-img" class="lightbox-content" src="" alt="大圖預覽">
+        <div id="lightbox-caption"></div>
+    </div>
+    <button class="lightbox-btn lightbox-next"><i class="fas fa-chevron-right"></i></button>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, { threshold: 0, rootMargin: "0px 0px -50px 0px" });
+
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+        // Lightbox 邏輯
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const closeBtn = document.querySelector('.lightbox-close');
+        const prevBtn = document.querySelector('.lightbox-prev');
+        const nextBtn = document.querySelector('.lightbox-next');
+        
+        let currentGallery = [];
+        let currentIdx = 0;
+
+        function registerLightboxImages(selector, isDiagram = false) {
+            const items = document.querySelectorAll(selector);
+            items.forEach((item, index) => {
+                let img, caption;
+                if (isDiagram) {
+                    img = item;
+                    caption = item.getAttribute('data-caption') || '';
+                } else {
+                    img = item.querySelector('img');
+                    const p = item.querySelector('p');
+                    caption = p ? p.textContent : (img ? img.alt : '');
+                }
+
+                if (img) {
+                    item.addEventListener('click', () => {
+                        currentGallery = [];
+                        const groupItems = document.querySelectorAll(selector);
+                        groupItems.forEach(gi => {
+                            let gImg = isDiagram ? gi : gi.querySelector('img');
+                            let gCaption = isDiagram ? gi.getAttribute('data-caption') : (gi.querySelector('p') ? gi.querySelector('p').textContent : gImg.alt);
+                            currentGallery.push({ src: gImg.src, caption: gCaption });
+                        });
+                        currentIdx = index;
+                        openLightbox();
+                    });
+                }
+            });
+        }
+
+        registerLightboxImages('.portfolio-item');
+        registerLightboxImages('.phone-mockup');
+        registerLightboxImages('.diagram-img', true);
+
+        function openLightbox() {
+            if (currentGallery.length > 0) {
+                lightboxImg.src = currentGallery[currentIdx].src;
+                lightboxCaption.textContent = currentGallery[currentIdx].caption;
+            }
+            lightbox.style.display = 'flex';
+        }
+
+        function closeLightbox() { lightbox.style.display = 'none'; }
+        
+        function nextImage() {
+            if (currentGallery.length > 0) {
+                currentIdx = (currentIdx + 1) % currentGallery.length;
+                openLightbox();
+            }
+        }
+
+        function prevImage() {
+            if (currentGallery.length > 0) {
+                currentIdx = (currentIdx - 1 + currentGallery.length) % currentGallery.length;
+                openLightbox();
+            }
+        }
+
+        closeBtn.addEventListener('click', closeLightbox);
+        nextBtn.addEventListener('click', nextImage);
+        prevBtn.addEventListener('click', prevImage);
+
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox || e.target === document.querySelector('.lightbox-content-wrapper')) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (lightbox.style.display === 'flex') {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'ArrowLeft') prevImage();
+            }
+        });
+
+        // 選單滾動監控
+        const backToTopBtn = document.getElementById('back-to-top');
+        const navLinks = document.querySelectorAll('.sticky-nav a');
+        const sections = Array.from(document.querySelectorAll('main.content-area .card[id]')).filter(section => {
+            return Array.from(navLinks).some(link => link.getAttribute('href') === `#${section.id}`);
+        });
+
+        function updateActiveNav() {
+            let current = '';
+            const scrollPosition = window.scrollY + (window.innerHeight / 3); 
+
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+                if (scrollPosition >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            if (Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 20) {
+                current = sections[sections.length - 1].getAttribute('id');
+            }
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                    const nav = document.querySelector('.sticky-nav');
+                    if (nav.scrollWidth > nav.clientWidth) {
+                        link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) { backToTopBtn.classList.add('show'); } 
+            else { backToTopBtn.classList.remove('show'); }
+            updateActiveNav();
+        });
+
+        updateActiveNav();
+        backToTopBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+</script>
+</body>
+</html>
