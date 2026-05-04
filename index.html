@@ -201,44 +201,6 @@
         .portfolio-item p { padding: 14px 16px; font-size: 15px; text-align: center; color: var(--text-dark); font-weight: 600; background: #FFF; border-top: 1px solid rgba(0,0,0,0.05); margin: 0; transition: color 0.3s; }
         .portfolio-item:hover p { color: var(--primary); }
 
-        /* ================= Design System ================= */
-        .ds-container { --ds-primary: #0ea5e9; --ds-secondary: #f43f5e; --ds-accent: #f59e0b; --ds-success: #10b981; --ds-danger: #ef4444; --ds-text-main: #0f172a; --ds-text-sub: #475569; --ds-text-light: #94a3b8; }
-        .ds-section { margin-bottom: 40px; }
-        .ds-section:last-child { margin-bottom: 0; }
-        .ds-title { font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 8px; }
-        .ds-desc { font-size: 15px; color: var(--text-body); margin-bottom: 24px; line-height: 1.6; }
-        .color-spec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
-        .color-card { background: rgba(255,255,255,0.7); border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); transition: transform 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
-        .color-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.06); }
-        .color-box { height: 90px; width: 100%; }
-        .color-details { padding: 16px; }
-        .color-details h4 { margin: 0 0 6px; font-size: 15px; font-weight: 800; color: var(--text-dark); }
-        .color-details code { display: inline-block; background: rgba(0,0,0,0.04); padding: 4px 8px; border-radius: 6px; font-size: 13px; color: var(--text-muted); margin-bottom: 8px; font-family: monospace; }
-        .color-usage { display: block; font-size: 13px; }
-
-        .component-demo { background: rgba(255,255,255,0.4); border: 1px dashed rgba(0,0,0,0.15); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 32px; }
-        .demo-row { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end; }
-        .demo-item { flex: 1; min-width: 220px; }
-        .demo-label { display: block; font-size: 13px; font-weight: 700; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; }
-        .ds-btn-base { padding: 12px 24px; border-radius: 10px; font-weight: 700; border: none; cursor: pointer; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); font-size: 15px; display: inline-flex; align-items: center; gap: 8px; }
-        .ds-btn-p { background: var(--ds-primary); color: white; }
-        .ds-btn-p:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(14, 165, 233, 0.25); }
-        .ds-btn-d { background: var(--ds-danger); color: white; }
-        .ds-btn-s { background: var(--ds-secondary); color: white; }
-        .ds-btn-fab { width: 56px; height: 56px; border-radius: 50%; background: var(--ds-accent); color: white; border: 3px solid white; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.3); cursor: pointer; transition: all 0.3s; }
-        .ds-btn-fab:hover { transform: rotate(90deg) scale(1.1); background: var(--ds-secondary); }
-        .ds-input-replica { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.9); border: 2px solid var(--ds-primary); border-radius: 14px; font-size: 15px; color: var(--text-dark); font-weight: 500; outline: none; }
-        
-        .motion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .motion-card { background: var(--ds-text-main); color: white; padding: 24px; border-radius: 16px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .motion-card h4 { margin: 0 0 8px; color: var(--ds-primary); font-size: 16px; font-weight: 700; }
-        .motion-card p { font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 12px; }
-        .bezier-curve { font-family: monospace; color: #10b981; font-size: 14px; background: rgba(0,0,0,0.4); padding: 6px 10px; border-radius: 6px; display: inline-block; }
-        
-        .a11y-demo { display: flex; gap: 20px; flex-wrap: wrap; }
-        .glass-demo { padding: 24px; border-radius: 16px; background: rgba(255,255,255,0.5); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.8); flex: 1; text-align: center; min-width: 220px; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05); }
-        .enhance-demo { border: 2px solid var(--ds-primary) !important; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15) !important; background: white; }
-
         /* ================= 動畫與 Lightbox ================= */
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -365,7 +327,6 @@
     <a href="#sdd">系統設計規格書 (SDD)</a>
     <a href="#use-case">使用案例圖(Use Case)</a>
     <a href="#erd">實體關聯圖(ERD)</a>
-    <a href="#design-system">Design System</a>
     <a href="#portfolio">Portfolio</a>
 </nav>
 
@@ -422,7 +383,7 @@
             <div class="project-group">
                 <h3><i class="fas fa-sitemap"></i> 系統架構 (System Architecture)</h3>
                 <div class="sdd-indent">
-                    <p class="about-text">本系統前端採 SPA（單頁應用）體驗設計，但後端由 MVC 架構支撐資料渲染與 API 服務。</p>
+                    <p class="about-text">本系統前端採 SPA（單頁應用）體驗設計，後端由 MVC 架構支撐資料渲染與 API 服務。</p>
                     <div class="skills-container">
                         <span class="skill-tag"><i class="fas fa-server" style="color: var(--primary);"></i> 後端框架: ASP.NET Core MVC</span>
                         <span class="skill-tag"><i class="fas fa-database" style="color: var(--primary);"></i> ORM: Entity Framework Core</span>
@@ -537,102 +498,6 @@
             </p>
             <div class="diagram-container">
                 <img src="img/erd.jpg" alt="TravelLedger Entity Relationship Diagram" class="diagram-img" data-caption="TravelLedger 實體關聯圖">
-            </div>
-        </div>
-
-        <!-- ================= 設計系統 ================= -->
-        <div id="design-system" class="card fade-in-up">
-            <h2 class="section-title"><i class="fas fa-palette"></i> 設計系統 (Design System)</h2>
-            
-            <div class="ds-container">
-                <div class="ds-section">
-                    <div class="ds-title">品牌色彩計畫 (Color Palette)</div>
-                    <p class="ds-desc">採用清爽的高飽和色調，結合 Slate 系列的中性灰，確保介面既有活力又不失專業感。</p>
-                    <div class="color-spec-grid">
-                        <div class="color-card"><div class="color-box" style="background: var(--ds-primary);"></div><div class="color-details"><h4>Primary Blue</h4><code>#0EA5E9</code><span class="color-usage">主操作、導航、強調色</span></div></div>
-                        <div class="color-card"><div class="color-box" style="background: var(--ds-secondary);"></div><div class="color-details"><h4>Secondary Rose</h4><code>#F43F5E</code><span class="color-usage">點綴、錯誤狀態、FAB Hover</span></div></div>
-                        <div class="color-card"><div class="color-box" style="background: var(--ds-accent);"></div><div class="color-details"><h4>Accent Amber</h4><code>#F59E0B</code><span class="color-usage">警告、提示、部分圖示</span></div></div>
-                        <div class="color-card"><div class="color-box" style="background: var(--ds-success);"></div><div class="color-details"><h4>Success Emerald</h4><code>#10B981</code><span class="color-usage">正面數據、完成狀態</span></div></div>
-                        <div class="color-card"><div class="color-box" style="background: var(--ds-text-main);"></div><div class="color-details"><h4>Slate Dark</h4><code>#0F172A</code><span class="color-usage">標題、主要文字、深色模式</span></div></div>
-                        <div class="color-card"><div class="color-box" style="background: #F8FAFC; border-bottom: 1px solid rgba(0,0,0,0.05);"></div><div class="color-details"><h4>Slate Light</h4><code>#F8FAFC</code><span class="color-usage">背景色、輸入框底色</span></div></div>
-                    </div>
-                </div>
-
-                <div class="ds-section">
-                    <div class="ds-title">字體排印 (Typography)</div>
-                    <p class="ds-desc">英數採用 <strong>Outfit</strong> 以展現幾何美感，中文則使用 <strong>思源黑體</strong> 確保跨平台顯示穩定。</p>
-                    <div class="table-responsive">
-                        <table class="typo-table">
-                            <thead><tr><th>Layer</th><th>Specs</th><th>Preview</th></tr></thead>
-                            <tbody>
-                                <tr><td>H1 / Hero Title</td><td>900 | 3.5rem | -2px</td><td style="font-size: 2.5rem; font-weight: 900; font-family: 'Outfit', sans-serif;">Tokyo 2026</td></tr>
-                                <tr><td>H2 / Section Title</td><td>800 | 2rem | -0.5px</td><td style="font-size: 1.8rem; font-weight: 800;">支出明細</td></tr>
-                                <tr><td>Body / Main Text</td><td>400 | 1rem | 1.6lh</td><td>歡迎來到 TravelLedger 旅遊管理系統。</td></tr>
-                                <tr><td>Data / Amount</td><td>800 | 1.5rem | Outfit</td><td style="font-size: 1.5rem; font-weight: 800; color: var(--ds-primary); font-family: 'Outfit', sans-serif;">$50,000.00</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="ds-section">
-                    <div class="ds-title">組件與空間互動 (Component & Spatial System)</div>
-                    <p class="ds-desc">所有元件均遵循「玻璃擬物化」原則，圓角為系統質感的關鍵，並具備高度互動回饋。</p>
-                    <div class="component-demo">
-                        <div class="demo-row">
-                            <div class="demo-item">
-                                <span class="demo-label">Primary Buttons</span>
-                                <div style="display: flex; gap: 12px; align-items: center;">
-                                    <button class="ds-btn-base ds-btn-p">儲存設定</button>
-                                    <button class="ds-btn-base ds-btn-p" style="padding: 12px; border-radius: 12px;"><i class="fas fa-plus"></i></button>
-                                </div>
-                            </div>
-                            <div class="demo-item">
-                                <span class="demo-label">Danger / Secondary</span>
-                                <div style="display: flex; gap: 12px;">
-                                    <button class="ds-btn-base ds-btn-d">刪除數據</button>
-                                    <button class="ds-btn-base ds-btn-s">取消</button>
-                                </div>
-                            </div>
-                            <div class="demo-item" style="flex: 0.5;">
-                                <span class="demo-label">FAB</span>
-                                <button class="ds-btn-fab"><i class="fas fa-plus"></i></button>
-                            </div>
-                        </div>
-
-                        <div class="demo-row">
-                            <div class="demo-item">
-                                <span class="demo-label">Glass Input (Radius MD)</span>
-                                <input type="text" class="ds-input-replica" placeholder="在此輸入文字...">
-                            </div>
-                            <div class="demo-item">
-                                <span class="demo-label">Menu Item (Active)</span>
-                                <div style="background: #069fe3; padding: 12px; border-radius: 16px;">
-                                    <div style="background: white; color: var(--ds-primary); padding: 12px 20px; border-radius: 16px 50px 16px 50px; font-weight: 700; display: flex; align-items: center; gap: 10px;">
-                                        <i class="fas fa-chart-pie"></i> 首頁儀表板
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="ds-section">
-                    <div class="ds-title">動畫與轉場 (Motion Design)</div>
-                    <p class="ds-desc">使用非線性動畫 (Non-linear/Ease)，所有的過渡應用物理彈性與慣性感。</p>
-                    <div class="motion-grid">
-                        <div class="motion-card"><h4>Standard Bouncy Curve</h4><p>應用於按鈕 Hover、視窗進場。</p><div class="bezier-curve">cubic-bezier(0.34, 1.56, 0.64, 1)</div></div>
-                        <div class="motion-card"><h4>Smooth Fade Curve</h4><p>應用於背景切換、透明度變化。</p><div class="bezier-curve">cubic-bezier(0.2, 0.8, 0.2, 1)</div></div>
-                    </div>
-                </div>
-
-                <div class="ds-section">
-                    <div class="ds-title">無障礙輔助 (Accessibility)</div>
-                    <p class="ds-desc">為了解決低對比度環境下的視覺辨識問題，設計了「UI 實體化邊框」模式。</p>
-                    <div class="a11y-demo">
-                        <div class="glass-demo"><span class="demo-label" style="display:block; margin-bottom: 8px;">Standard Glass</span><p style="margin:0; font-size: 14px; color: var(--text-body);">輕盈、半透明</p></div>
-                        <div class="glass-demo enhance-demo"><span class="demo-label" style="display:block; margin-bottom: 8px; color: var(--ds-primary);">UI Enhance Mode</span><p style="margin:0; font-size: 14px; color: var(--text-body);">高對比、實體邊框、深陰影</p></div>
-                    </div>
-                </div>
             </div>
         </div>
 
