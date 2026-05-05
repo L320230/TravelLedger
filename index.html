@@ -3,313 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>李麗娟 UI/UX 設計師履歷+作品集</title>
+    <title>Travel Ledger</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* ================= 核心修復與全域變數 ================= */
-        html { scroll-behavior: smooth; overflow-x: hidden; }
-
-        body {
-            font-family: 'Inter', 'Noto Sans TC', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-body);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            width: 100%;
-            margin: 0; padding: 0;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --bg-body: #F4F7F9;
-            --text-dark: #0F172A;
-            --text-body: #334155;
-            --text-muted: #64748B;
-            --primary: #4F46E5;
-            --primary-light: #818CF8;
-            --accent: #06B6D4;
-            --gold: #F59E0B;
-            --glass-bg: rgba(255, 255, 255, 0.75);
-            --glass-border: rgba(255, 255, 255, 0.8);
-            --radius-lg: 24px;
-            --radius-md: 16px;
-            --radius-sm: 12px;
-            --shadow-glass: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
-            --shadow-hover: 0 20px 40px -5px rgba(15, 23, 42, 0.12);
-        }
-
-        /* ================= 動態背景 ================= */
-        .aurora-bg { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -2; overflow: hidden; background: #F8FAFC; }
-        .blob { position: absolute; filter: blur(90px); opacity: 0.5; border-radius: 50%; animation: float 20s infinite alternate ease-in-out; z-index: -1; }
-        .blob-1 { width: 600px; height: 600px; background: #E0E7FF; top: -10%; left: -10%; }
-        .blob-2 { width: 500px; height: 500px; background: #FCE7F3; top: 40%; right: -10%; animation-delay: -5s; }
-        .blob-3 { width: 400px; height: 400px; background: #CFFAFE; bottom: -10%; left: 20%; animation-delay: -10s; }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-            100% { transform: translate(40px, 60px) scale(1.05); }
-        }
-
-        /* ================= 置頂主視覺 Hero Section ================= */
-        .spotlight-hero {
-            position: relative;
-            background: linear-gradient(-45deg, #0B1120, #1E293B, #1e1b4b, #0f172a);
-            background-size: 400% 400%; animation: gradientBG 15s ease infinite;
-            min-height: 90vh; display: flex; align-items: center; overflow: hidden;
-            padding: 80px 5%; z-index: 1; width: 100%;
-        }
-        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-
-        .glow-orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.6; z-index: -1; animation: pulse 10s infinite alternate ease-in-out; }
-        .hero-glow-1 { width: 600px; height: 600px; background: #4F46E5; top: -10%; left: -5%; }
-        .hero-glow-2 { width: 600px; height: 600px; background: #06B6D4; bottom: -20%; right: -10%; }
-        @keyframes pulse { 0% { transform: scale(1); } 100% { transform: scale(1.2); } }
-
-        .hero-container { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 5fr 6fr; gap: 40px; align-items: center; width: 100%; }
-        .hero-content { color: #FFF; z-index: 10; animation: fadeUp 1s ease forwards; }
-        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); padding: 8px 20px; border-radius: 100px; font-size: 14px; font-weight: 600; color: #E0E7FF; margin-bottom: 24px; letter-spacing: 1px; }
-        .fa-crown:before { content: "\f521"; color: #fbd408; }
-        .hero-title { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 16px; letter-spacing: -1px; word-wrap: break-word; }
-        .hero-subtitle { font-size: 1.5rem; font-weight: 360; color: #afc3df; margin-bottom: 32px; }
-        
-        .hero-project-box { background: rgba(15, 23, 42, 0.3); border: 1px solid rgba(255, 255, 255, 0.2); border-left: 4px solid var(--accent); padding: 24px; border-radius: var(--radius-md); backdrop-filter: blur(12px); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6); }
-        .hp-title { font-size: 18px; font-weight: 700; color: #FFF; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-        .hp-tech { font-size: 14px; color: var(--accent); font-family: 'Inter'; font-weight: 600; margin-bottom: 12px; }
-        
-        /* ================= 核心排版：齊行與防破版 ================= */
-        .hp-desc, .about-text { 
-            color: var(--text-body); 
-            font-size: 16px; 
-            line-height: 1.8; 
-            text-align: justify; 
-            text-justify: inter-ideograph; 
-            word-break: break-word; 
-            letter-spacing: 0.5px;
-            margin-bottom: 1.2rem;
-        }
-        .hp-desc { color: #CBD5E1; margin-bottom: 0; }
-
-        .hero-visual { position: relative; height: 600px; display: flex; justify-content: center; align-items: center; width: 100%; }
-        .phones-wrapper { position: relative; transform: scale(0.85); z-index: 10; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
-        .phone-mockup { position: absolute; width: 280px; height: 606px; background-color: #fff; border-radius: 42px; border: 8px solid #fff; box-shadow: inset 0 0 0 2px #e2e8f0, 0 25px 50px -12px rgba(0, 0, 0, 0.5); overflow: hidden; cursor: pointer; transform: translate(var(--tx), var(--ty)) scale(var(--s)) rotate(var(--r)); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease, z-index 0s; opacity: 0; animation: phoneStagger 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-        @keyframes phoneStagger { 0% { opacity: 0; translate: 0 150px; } 100% { opacity: 1; translate: 0 0; } }
-        .phone-mockup img { width: 100%; height: 100%; object-fit: cover; }
-        .phone-mockup:hover { transform: translate(var(--tx), calc(var(--ty) - 40px)) scale(calc(var(--s) + 0.05)) rotate(0deg); z-index: 20 !important; box-shadow: 0 40px 80px rgba(0,0,0,0.6); }
-
-        .pm-L2 { --tx: -280px; --ty: 60px; --s: 0.7; --r: -18deg; z-index: 1; animation-delay: 0.4s; }
-        .pm-L1 { --tx: -140px; --ty: 20px; --s: 0.85; --r: -9deg; z-index: 2; animation-delay: 0.2s; }
-        .pm-C  { --tx: 0px; --ty: -20px; --s: 1; --r: 0deg; z-index: 3; box-shadow: inset 0 0 0 2px #e2e8f0, 0 30px 60px rgba(0,0,0,0.6); animation-delay: 0s; }
-        .pm-R1 { --tx: 140px; --ty: 20px; --s: 0.85; --r: 9deg; z-index: 2; animation-delay: 0.2s; }
-        .pm-R2 { --tx: 280px; --ty: 60px; --s: 0.7; --r: 18deg; z-index: 1; animation-delay: 0.4s; }
-
-        /* ================= 導覽列 (修復 RWD 與跑版) ================= */
-        .sticky-nav-container {
-            position: sticky;
-            top: 0;
-            z-index: 999;
-            background: #3339a9;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            margin-bottom: 40px;
-            transition: all 0.3s ease;
-        }
-
-        .sticky-nav {
-            display: flex;
-            overflow-x: auto;
-            flex-wrap: nowrap; /* 強制不換行，解決跑版 */
-            -ms-overflow-style: none; /* 隱藏捲軸 IE and Edge */
-            scrollbar-width: none; /* 隱藏捲軸 Firefox */
-            scroll-behavior: smooth;
-            padding: 16px 5%;
-            /*gap: 24px; */
-            width: 100%;
-            max-width: 1460px;
-        }
-
-        .sticky-nav::-webkit-scrollbar { display: none; } /* 隱藏捲軸 Chrome, Safari, Opera */
-
-        .sticky-nav a {
-            text-decoration: none;
-            color: #fff;
-            font-weight: 700;
-            font-size: 16px;
-            padding: 8px 24px;
-            border-radius: 100px;
-            transition: all 0.3s ease;
-            white-space: nowrap; /* 文字不換行 */
-            flex-shrink: 0; /* 防止按鈕被壓縮 */
-        }
-
-        .sticky-nav a:hover, .sticky-nav a.active {
-            background: var(--primary);
-            color: #FFF;
-            box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
-            transform: translateY(-2px);
-        }
-
-        /* 左右滑動按鈕樣式 */
-        .nav-scroll-btn {
-            background: transparent;
-            color: rgba(255, 255, 255, 0.7);
-            border: none;
-            font-size: 20px;
-            padding: 0 16px;
-            cursor: pointer;
-            display: none; /* 預設隱藏，由 JS 控制顯示 */
-            height: 100%;
-            align-items: center;
-            transition: color 0.3s;
-        }
-
-        .nav-scroll-btn:hover { color: #FFF; }
-
-        /* ================= 內容佈局與卡片 ================= */
-        .main-layout { max-width: 1320px; margin: 0 auto 80px; padding: 0 2%; display: grid; position: relative; z-index: 20; align-items: start; width: 100%; }
-        .content-area { display: flex; flex-direction: column; min-width: 0; width: 100%; }
-
-        .card { background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-top: 4px solid #B5B0F6; border-radius: var(--radius-lg); padding: 32px; box-shadow: var(--shadow-glass); margin-bottom: 24px; transition: transform 0.4s ease, box-shadow 0.4s ease; scroll-margin-top: 100px; width: 100%; }
-        .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); background: rgba(255,255,255,0.9); }
-
-        .section-title { font-weight: 700; color: var(--text-dark); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; letter-spacing: 0.5px; }
-        .section-title i { color: var(--primary); background: rgba(79, 70, 229, 0.15); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 16px; }
-
-        .highlight { color: var(--primary); font-weight: 700; background: #EEF2FF; padding: 2px 6px; border-radius: 4px; }
-        .skills-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-        .skill-tag { background:#f8fafc; color: var(--text-dark); padding: 8px 16px; border-radius: 100px; font-size: 13px; font-weight: 600; border: 1px solid rgb(214 212 241); transition: all 0.3s ease; }
-        .skill-tag:hover { background: #f0efff; border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); }
-
-        .project-group { margin-bottom: 32px; }
-        .project-group:last-child { margin-bottom: 0; }
-        .project-group h3 { color: var(--text-dark); font-size: 1.15rem; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; font-weight: 700; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 8px; }
-        .sdd-indent { padding-left: 12px; }
-
-        /* ================= 內部卡片模組 (Card Grid) ================= */
-        .intro-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 20px; margin-top: 20px; }
-        .intro-grid01 { display: grid; gap: 20px; margin-top: 20px; grid-template-columns: repeat(2, 1fr); }
-
-        .intro-sub-card { background: rgba(255, 255, 255, 0.6); border: 1px solid rgba(255, 255, 255, 0.9); padding: 24px; border-radius: var(--radius-md); transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 15px -5px rgba(15, 23, 42, 0.03); display: flex; flex-direction: column; }
-        .intro-sub-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px -5px rgba(15, 23, 42, 0.08); background: rgba(255, 255, 255, 0.85); border-color: rgba(79, 70, 229, 0.3); }
-        .intro-sub-card h4 { margin-top: 0; color: var(--primary); font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-        .intro-sub-card .about-text { margin-bottom: 0; font-size: 16px; }
-        .tag-mini { font-size: 12px; background: rgba(79, 70, 229, 0.1); color: var(--primary); padding: 4px 8px; border-radius: 6px; margin-right: 6px; font-weight: 600; display: inline-block; margin-bottom: 4px; }
-
-        /* 表格與圖表 */
-        .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 16px; border-radius: 12px; }
-        .typo-table { width: 100%; border-collapse: collapse; background: rgba(255,255,255,0.6); }
-        .typo-table th, .typo-table td { padding: 16px 20px; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.05); white-space: nowrap; } 
-        .typo-table th { color: var(--text-muted); font-weight: 600; background: rgba(0,0,0,0.03); text-transform: uppercase; letter-spacing: 1px; }
-        .typo-table tbody tr { transition: background 0.2s ease; }
-        .typo-table tbody tr:hover { background: rgba(255, 255, 255, 0.8); }
-
-        .diagram-container { width: 100%; background: #FFF; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 4px 10px rgba(0,0,0,0.02); overflow: hidden; margin-top: 16px; }
-        .diagram-img { width: 100%; height: auto; display: block; cursor: zoom-in; transition: transform 0.3s ease; }
-        .diagram-img:hover { transform: scale(1.02); }
-
-        /* ================= 作品集 ================= */
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 32px; }
-        .portfolio-item { border-radius: var(--radius-sm); overflow: hidden; border: 1px solid rgba(0,0,0,0.05); background: #FFF; cursor: pointer; position: relative; transition: all 0.4s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.02); display: flex; flex-direction: column; }
-        .portfolio-item:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); border-color: rgba(79, 70, 229, 0.3); }
-        .portfolio-item .img-wrapper { overflow: hidden; width: 100%; height: auto; flex-shrink: 0; }
-        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-        .portfolio-item:hover img { transform: scale(1.08); }
-        .portfolio-item p { padding: 14px 16px; font-size: 15px; text-align: center; color: var(--text-dark); font-weight: 600; background: #FFF; border-top: 1px solid rgba(0,0,0,0.05); margin: 0; transition: color 0.3s; }
-        .portfolio-item:hover p { color: var(--primary); }
-
-        /* ================= 動畫與 Lightbox ================= */
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
-
-        .lightbox { display: none; position: fixed; z-index: 9999; inset: 0; background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); align-items: center; justify-content: center; }
-        .lightbox-content-wrapper { position: relative; max-width: 90%; max-height: 90%; text-align: center; z-index: 100; }
-        .lightbox-content { max-width: 100%; max-height: 80vh; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); object-fit: contain; }
-        #lightbox-caption { margin-top: 20px; color: #FFF; font-size: 18px; font-weight: 600; letter-spacing: 1px; }
-
-        .lightbox-btn { position: absolute; z-index: 1000; background: rgba(0, 0, 0, 0.5); color: white; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; backdrop-filter: blur(4px); }
-        .lightbox-close { top: 30px; right: 40px; width: 48px; height: 48px; border-radius: 50%; font-size: 24px; }
-        .lightbox-prev, .lightbox-next { top: 50%; transform: translateY(-50%); width: 56px; height: 56px; border-radius: 50%; font-size: 24px; }
-        .lightbox-prev { left: 40px; }
-        .lightbox-next { right: 40px; }
-        .lightbox-btn:hover { background: var(--primary); transform: scale(1.1); }
-        .lightbox-prev:hover { transform: translateY(-50%) scale(1.1); }
-        .lightbox-next:hover { transform: translateY(-50%) scale(1.1); }
-
-        .btn-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--text-dark); color: #FFF; border: none; border-radius: 50%; font-size: 20px; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.15); opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); z-index: 1000; }
-        .btn-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
-        .btn-top:hover { background: var(--primary); transform: translateY(-5px); }
-
-        /* ================= RWD 響應式佈局 ================= */
-        @media (max-width: 1280px) {
-            .hero-container { grid-template-columns: 1fr 1fr; }
-            .hero-title { font-size: 3.5rem; }
-            .phones-wrapper { transform: scale(0.75); }
-        }
-        
-        @media (max-width: 1024px) {
-            .spotlight-hero { padding: 100px 5% 60px; min-height: auto; }
-            .hero-container { grid-template-columns: 1fr; text-align: center; gap: 40px; }
-            .hero-project-box { text-align: left; max-width: 720px; margin: 0 auto; }
-            .hero-visual { height: 480px; }
-            .phones-wrapper { transform: scale(0.7); }
-            
-            .main-layout { grid-template-columns: 1fr; padding: 0 4%; }
-            .portfolio-item .img-wrapper { height: auto; aspect-ratio: 16 / 9; width: 100%; flex-shrink: 0; }
-            
-            /* 更新 RWD 導覽列內距微調 */
-            .sticky-nav { padding: 12px 2%; gap: 12px; }
-            .sticky-nav a { font-size: 15px; padding: 8px 20px; }
-        }
-        
-        @media (max-width: 768px) {
-            .hero-title { font-size: 2.8rem; }
-            .hero-visual { height: 380px; }
-            .phones-wrapper { transform: scale(0.6); }
-            
-            .pm-L2, .pm-R2 { display: none !important; }
-            .pm-L1 { --tx: -150px; --ty: 15px; --s: 0.85; --r: -8deg; }
-            .pm-R1 { --tx: 150px; --ty: 15px; --s: 0.85; --r: 8deg; }
-            .pm-C  { --tx: 0px; --ty: -10px; --s: 1; --r: 0deg; }
-
-            .portfolio-grid { grid-template-columns: 1fr; }
-            .lightbox-prev { left: 10px; width: 44px; height: 44px; }
-            .lightbox-next { right: 10px; width: 44px; height: 44px; }
-            .motion-grid { grid-template-columns: 1fr; }
-            .demo-row { flex-direction: column; align-items: stretch; gap: 16px; }
-            .sdd-indent { padding-left: 0; }
-        }
-        
-        @media (max-width: 480px) {
-            .spotlight-hero { padding: 80px 5% 40px; }
-            .hero-title { font-size: 2.2rem; }
-            .hero-subtitle { font-size: 1.2rem; margin-bottom: 24px; }
-            
-            .hero-project-box { padding: 20px; }
-            .hp-title { font-size: 16px; align-items: flex-start; }
-            
-            .hero-visual { height: 300px; }
-            .phones-wrapper { transform: scale(0.48); }
-            .pm-L1 { --tx: -130px; --ty: 10px; --s: 0.85; --r: -6deg; }
-            .pm-R1 { --tx: 130px; --ty: 10px; --s: 0.85; --r: 6deg; }
-            
-            .card { padding: 24px 16px; }
-            .ds-container { padding: 0; }
-            .color-spec-grid { grid-template-columns: 1fr 1fr; } 
-            .intro-grid01 { grid-template-columns: repeat(1, 1fr); }
-        }
-    </style>
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -376,6 +76,20 @@
                     <p class="about-text">
                         旅遊時多人代墊款項與分攤邏輯（均分、比例、指定）極其複雜。傳統記帳軟體缺乏針對「多角債務」的底層架構，導致旅途結算混亂，難以精確釐清誰該還誰多少錢。
                     </p>
+<div style="margin-top:20px;display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;align-items:flex-start;gap:12px;background:#FEF2F2;border:1.5px solid #FECACA;border-radius:10px;padding:12px 16px;">
+    <span style="font-size:20px;flex-shrink:0;">😵</span>
+    <div style="font-size:13px;color:#7F1D1D;line-height:1.6;"><strong>多角債務難計算</strong><br>A付B、B付C、C又付A，人工計算極易出錯</div>
+  </div>
+  <div style="display:flex;align-items:flex-start;gap:12px;background:#FEF2F2;border:1.5px solid #FECACA;border-radius:10px;padding:12px 16px;">
+    <span style="font-size:20px;flex-shrink:0;">📊</span>
+    <div style="font-size:13px;color:#7F1D1D;line-height:1.6;"><strong>傳統軟體缺乏底層架構</strong><br>現有記帳 App 僅支援簡單均分，無法處理複雜分攤情境</div>
+  </div>
+  <div style="display:flex;align-items:flex-start;gap:12px;background:#FEF2F2;border:1.5px solid #FECACA;border-radius:10px;padding:12px 16px;">
+    <span style="font-size:20px;flex-shrink:0;">🌍</span>
+    <div style="font-size:13px;color:#7F1D1D;line-height:1.6;"><strong>跨幣別結算混亂</strong><br>多國旅遊涉及不同幣別，換算與結算同時進行令人頭痛</div>
+  </div>
+</div>
                 </div>
 
                 <div class="intro-sub-card">
@@ -383,6 +97,17 @@
                     <p class="about-text">
                         我從需求分析出發，主導涵蓋「行前預算、旅途記帳、行後結算」完整生命週期的系統開發。結合 UI/UX 設計與專案管理思維，統籌規劃前端響應式介面、視覺風格，以及後端資料庫的正規化設計，確保財務數據的一致性與可維護性。
                     </p>
+<div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;">
+  <div style="background:#EEF2FF;border:1.5px solid #C7D2FE;border-radius:10px;padding:10px 16px;text-align:center;font-size:13px;font-weight:600;color:#4338CA;min-width:90px;">📋<br>需求分析</div>
+  <div style="color:#A5B4FC;font-size:20px;font-weight:300;">→</div>
+  <div style="background:#EEF2FF;border:1.5px solid #C7D2FE;border-radius:10px;padding:10px 16px;text-align:center;font-size:13px;font-weight:600;color:#4338CA;min-width:90px;">🗂️<br>Use Case / ERD</div>
+  <div style="color:#A5B4FC;font-size:20px;font-weight:300;">→</div>
+  <div style="background:#EEF2FF;border:1.5px solid #C7D2FE;border-radius:10px;padding:10px 16px;text-align:center;font-size:13px;font-weight:600;color:#4338CA;min-width:90px;">🎨<br>UI/UX 設計</div>
+  <div style="color:#A5B4FC;font-size:20px;font-weight:300;">→</div>
+  <div style="background:#EEF2FF;border:1.5px solid #C7D2FE;border-radius:10px;padding:10px 16px;text-align:center;font-size:13px;font-weight:600;color:#4338CA;min-width:90px;">⚙️<br>前後端開發</div>
+  <div style="color:#A5B4FC;font-size:20px;font-weight:300;">→</div>
+  <div style="background:#4F46E5;border:1.5px solid #4338CA;border-radius:10px;padding:10px 16px;text-align:center;font-size:13px;font-weight:600;color:#fff;min-width:90px;">🚀<br>部署上線</div>
+</div>
                 </div>
 
                 <div class="intro-sub-card">
@@ -390,6 +115,16 @@
                     <p class="about-text">
                         為解決核心拆帳痛點，導入貪婪演算法（Greedy Algorithm）自動推導出最精簡的「建議轉帳清單」。視覺體驗上捨棄傳統進度條，創新設計「能量水瓶（Liquid Tank UI）」顯示預算水位，超支時觸發沸騰特效強化警示。資料安全面，設計防呆機制，刪除自訂類別時自動將帳務轉移至預設分類，防止產生孤兒數據。
                     </p>
+<div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+  <div style="background:#FEF2F2;border:1.5px solid #FECACA;border-radius:10px;padding:14px;">
+    <div style="font-size:12px;font-weight:700;color:#991B1B;margin-bottom:8px;">❌ 傳統做法</div>
+    <div style="font-size:13px;color:#7F1D1D;line-height:1.7;">人工計算分帳<br>Excel 手動記錄<br>進度條顯示預算<br>結算後仍需自行確認</div>
+  </div>
+  <div style="background:#F0FDF4;border:1.5px solid #BBF7D0;border-radius:10px;padding:14px;">
+    <div style="font-size:12px;font-weight:700;color:#166534;margin-bottom:8px;">✅ TravelLedger</div>
+    <div style="font-size:13px;color:#14532D;line-height:1.7;">Greedy Algorithm 自動結算<br>三種分帳模式一鍵選擇<br>Liquid Tank UI 視覺化預算<br>系統自動產出轉帳清單</div>
+  </div>
+</div>
                 </div>
 
                 <div class="intro-sub-card">
@@ -397,6 +132,27 @@
                     <p class="about-text">
                         系統成功整合三種分帳模式與匯率轉換，支援一鍵匯出結算報表。這次經驗讓我深刻體會到：優秀的 PM 必須具備跨領域的技術視野——從底層資料庫架構到前端互動體驗的通盤掌握，才能將複雜的業務邏輯轉化為流暢的數位體驗。
                     </p>
+<div style="margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;">
+  <div style="background:#EEF2FF;border:1.5px solid #C7D2FE;border-radius:10px;padding:14px;text-align:center;">
+    <div style="font-size:26px;font-weight:800;color:#4338CA;">3</div>
+    <div style="font-size:12px;color:#6366F1;font-weight:600;margin-top:2px;">分帳模式</div>
+  </div>
+  <div style="background:#EEF2FF;border:1.5px solid #C7D2FE;border-radius:10px;padding:14px;text-align:center;">
+    <div style="font-size:26px;font-weight:800;color:#4338CA;">2</div>
+    <div style="font-size:12px;color:#6366F1;font-weight:600;margin-top:2px;">匯出格式<br>CSV / PDF</div>
+  </div>
+  <div style="background:#EEF2FF;border:1.5px solid #C7D2FE;border-radius:10px;padding:14px;text-align:center;">
+    <div style="font-size:26px;font-weight:800;color:#4338CA;">1人</div>
+    <div style="font-size:12px;color:#6366F1;font-weight:600;margin-top:2px;">貫穿完整<br>開發週期</div>
+  </div>
+</div>
+<div style="background:#F0FDF4;border:1.5px solid #BBF7D0;border-radius:10px;padding:14px;">
+  <div style="font-size:12px;font-weight:700;color:#166534;margin-bottom:8px;">💡 PM 的最大體悟</div>
+  <div style="font-size:13px;color:#14532D;line-height:1.8;">
+    當 PM 真正走過每一個開發環節，才能在<strong>對的時間點</strong>提出對的問題。<br>
+    技術視野不是要取代工程師，而是讓溝通更精準、判斷更有依據。
+  </div>
+</div>
                 </div>
             </div>
         </div>
@@ -612,181 +368,7 @@
     <button class="lightbox-btn lightbox-next"><i class="fas fa-chevron-right"></i></button>
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // --- 1. 滾動動畫載入 ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); 
-                }
-            });
-        }, { threshold: 0, rootMargin: "0px 0px -50px 0px" });
+<script src="script.js"></script>
 
-        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
-
-        // --- 2. Lightbox 邏輯 ---
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxCaption = document.getElementById('lightbox-caption');
-        const closeBtn = document.querySelector('.lightbox-close');
-        const prevBtn = document.querySelector('.lightbox-prev');
-        const nextBtn = document.querySelector('.lightbox-next');
-        
-        let currentGallery = [];
-        let currentIdx = 0;
-
-        function registerLightboxImages(selector, isDiagram = false) {
-            const items = document.querySelectorAll(selector);
-            items.forEach((item, index) => {
-                let img, caption;
-                if (isDiagram) {
-                    img = item;
-                    caption = item.getAttribute('data-caption') || '';
-                } else {
-                    img = item.querySelector('img');
-                    const p = item.querySelector('p');
-                    caption = p ? p.textContent : (img ? img.alt : '');
-                }
-
-                if (img) {
-                    item.addEventListener('click', () => {
-                        currentGallery = [];
-                        const groupItems = document.querySelectorAll(selector);
-                        groupItems.forEach(gi => {
-                            let gImg = isDiagram ? gi : gi.querySelector('img');
-                            let gCaption = isDiagram ? gi.getAttribute('data-caption') : (gi.querySelector('p') ? gi.querySelector('p').textContent : gImg.alt);
-                            currentGallery.push({ src: gImg.src, caption: gCaption });
-                        });
-                        currentIdx = index;
-                        openLightbox();
-                    });
-                }
-            });
-        }
-
-        registerLightboxImages('.portfolio-item');
-        registerLightboxImages('.phone-mockup');
-        registerLightboxImages('.diagram-img', true);
-
-        function openLightbox() {
-            if (currentGallery.length > 0) {
-                lightboxImg.src = currentGallery[currentIdx].src;
-                lightboxCaption.textContent = currentGallery[currentIdx].caption;
-            }
-            lightbox.style.display = 'flex';
-        }
-
-        function closeLightbox() { lightbox.style.display = 'none'; }
-        
-        function nextImage() {
-            if (currentGallery.length > 0) {
-                currentIdx = (currentIdx + 1) % currentGallery.length;
-                openLightbox();
-            }
-        }
-
-        function prevImage() {
-            if (currentGallery.length > 0) {
-                currentIdx = (currentIdx - 1 + currentGallery.length) % currentGallery.length;
-                openLightbox();
-            }
-        }
-
-        closeBtn.addEventListener('click', closeLightbox);
-        nextBtn.addEventListener('click', nextImage);
-        prevBtn.addEventListener('click', prevImage);
-
-        lightbox.addEventListener('click', function(e) {
-            if (e.target === lightbox || e.target === document.querySelector('.lightbox-content-wrapper')) {
-                closeLightbox();
-            }
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (lightbox.style.display === 'flex') {
-                if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowRight') nextImage();
-                if (e.key === 'ArrowLeft') prevImage();
-            }
-        });
-
-        // --- 3. 選單滾動監控 (Scrollspy) ---
-        const backToTopBtn = document.getElementById('back-to-top');
-        const navLinks = document.querySelectorAll('.sticky-nav a');
-        const sections = Array.from(document.querySelectorAll('main.content-area .card[id]')).filter(section => {
-            return Array.from(navLinks).some(link => link.getAttribute('href') === `#${section.id}`);
-        });
-
-        function updateActiveNav() {
-            let current = '';
-            const scrollPosition = window.scrollY + (window.innerHeight / 3); 
-
-            sections.forEach(section => {
-                const sectionTop = section.getBoundingClientRect().top + window.scrollY;
-                if (scrollPosition >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            if (Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 20) {
-                current = sections[sections.length - 1].getAttribute('id');
-            }
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                    const nav = document.querySelector('.sticky-nav');
-                    if (nav.scrollWidth > nav.clientWidth) {
-                        link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                    }
-                }
-            });
-        }
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 400) { backToTopBtn.classList.add('show'); } 
-            else { backToTopBtn.classList.remove('show'); }
-            updateActiveNav();
-        });
-
-        updateActiveNav();
-        backToTopBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
-
-        // --- 4. 主選單左右滑動與箭頭顯示邏輯 ---
-        const navMenu = document.querySelector('.sticky-nav');
-        const leftArrowBtn = document.querySelector('.left-arrow');
-        const rightArrowBtn = document.querySelector('.right-arrow');
-
-        function checkNavScroll() {
-            // 檢查選單內容的實際寬度是否大於容器的顯示寬度
-            if (navMenu.scrollWidth > navMenu.clientWidth) {
-                leftArrowBtn.style.display = 'flex';
-                rightArrowBtn.style.display = 'flex';
-            } else {
-                leftArrowBtn.style.display = 'none';
-                rightArrowBtn.style.display = 'none';
-            }
-        }
-
-        // 監聽視窗尺寸改變，即時更新按鈕顯示狀態
-        window.addEventListener('resize', checkNavScroll);
-
-        // 頁面載入時執行一次初始檢查
-        checkNavScroll();
-
-        // 點擊左箭頭：向左滑動 250px
-        leftArrowBtn.addEventListener('click', () => {
-            navMenu.scrollBy({ left: -250, behavior: 'smooth' });
-        });
-
-        // 點擊右箭頭：向右滑動 250px
-        rightArrowBtn.addEventListener('click', () => {
-            navMenu.scrollBy({ left: 250, behavior: 'smooth' });
-        });
-    });
-</script>
 </body>
 </html>
